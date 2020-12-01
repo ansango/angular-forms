@@ -1,0 +1,42 @@
+<div class="form-group">
+  <form (ngSubmit)="newWine(wineForm)" #wineForm="ngForm">
+    <div ngModelGroup="wine">
+      <div class="wine-name">
+        <input
+          type="text"
+          placeholder="Wine Name"
+          required
+          name="name"
+          ngModel
+        />
+      </div>
+      
+      <div class="wine-price">
+        <input
+          type="number"
+          placeholder="Wine Price"
+          required
+          name="price"
+          ngModel
+        />
+      </div>
+      <div class="wine-image">
+        <input
+          type="text"
+          placeholder="Wine Image URL"
+          name="imageUrl"
+          required
+          ngModel
+        />
+      </div>
+      <div class="wine-sale">
+        <input type="checkbox" name="isOnSale" id="onSale" ngModel />
+        <label for="onSale">On Sale</label>
+      </div>
+    </div>
+    <button type="submit">Create Wine</button>
+  </form>
+</div>
+
+<h4>Wine is {{ wine | json }}</h4>
+<h4>Data has been confirmed: {{ confirmed }}</h4>
