@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import Wine from '../model/wine';
 
 @Component({
@@ -9,20 +10,19 @@ import Wine from '../model/wine';
 export class WineNewComponent implements OnInit {
   public wine!: Wine;
   public confirmed = false;
-
   constructor() {}
 
   ngOnInit(): void {
-    //this.stock = new Stock('', '', 0, 0, 'NASDAQ');
+    
   }
 
-  newWine(wineForm: { value: { wine: Wine }; valid: any }) {
-    console.log('Stock form', wineForm.value);
-    if (wineForm.valid) {
+  newWine(wineForm: { value: { wine: Wine }; invalid: any }) { 
+    //? invalid no deberia ser bool?
+    if (wineForm.invalid) {
+      console.log('Correct all errors and resubmit the form');
+    } else {
       this.wine = wineForm.value.wine;
       console.log('Creating wine ', this.wine);
-    } else {
-      console.error('Wine form is in an invalid state');
     }
   }
 }
