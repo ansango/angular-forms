@@ -1,21 +1,30 @@
 <div class="wrapper-new-wine">
   <div class="form-group wrapper-form">
     <h2>Create a New Wine</h2>
-    <form class="wine-form" (ngSubmit)="newWine(wineForm)" #wineForm="ngForm">
-      <div class="wine-group" ngModelGroup="wine">
+    <form
+      class="wine-form"
+      (ngSubmit)="createWine(wineForm)"
+      [formGroup]="wineForm"
+    >
+      <div class="wine-group">
         <div class="wine-name">
           <mat-form-field appearance="fill" class="field">
             <mat-label>Wine Name</mat-label>
             <input
               matInput
               type="text"
-              ngModel
-              #wineName="ngModel"
               name="name"
+              placeholder="Wine Name"
+              formControlName="name"
               required
             />
             <mat-error
-              *ngIf="(wineName.dirty || wineName.touched || message) && wineName.invalid"
+              *ngIf="
+                (wineForm.get('name')!.dirty ||
+                  wineForm.get('name')!.touched ||
+                  message) &&
+                wineForm.get('name')!.invalid
+              "
               >Wine Name is required</mat-error
             >
           </mat-form-field>
@@ -26,18 +35,24 @@
             <input
               matInput
               type="number"
-              ngModel
-              #winePrice="ngModel"
               name="price"
-              required
+              placeholder="Wine Price"
+              formControlName="price"
             />
             <mat-error
               *ngIf="
-                (winePrice.dirty || winePrice.touched || message) &&
-                winePrice.invalid
+                (wineForm.get('price')!.dirty ||
+                  wineForm.get('price')!.touched ||
+                  message) &&
+                wineForm.get('price')!.invalid
               "
             >
-              Wine Price is required
+              <div *ngIf="wineForm.get('price')!.errors!.required">
+                Wine price is required
+              </div>
+              <div *ngIf="wineForm.get('price')!.errors!.min">
+                Wine price must be atleast 1
+              </div>
             </mat-error>
           </mat-form-field>
         </div>
@@ -47,29 +62,34 @@
             <input
               matInput
               type="text"
-              ngModel
               name="imageUrl"
-              #wineImageUrl="ngModel"
-              pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$"
-              required
+              placeholder="Wine Image URL"
+              formControlName="imageUrl"
             />
             <mat-error
               *ngIf="
-                (wineImageUrl.dirty || wineImageUrl.touched || message) &&
-                wineImageUrl.invalid
+                (wineForm.get('imageUrl')!.dirty ||
+                  wineForm.get('imageUrl')!.touched ||
+                  message) &&
+                wineForm.get('imageUrl')!.invalid
               "
             >
-              <div *ngIf="wineImageUrl.errors!.required">
+              <div *ngIf="wineForm.get('imageUrl')!.errors!.required">
                 Wine Image URL is required
               </div>
-              <div *ngIf="wineImageUrl.errors!.pattern">
+              <div *ngIf="wineForm.get('imageUrl')!.errors!.pattern">
                 Wine Image URL does not seem to be a valid URL
               </div>
             </mat-error>
           </mat-form-field>
         </div>
         <div class="wine-sale">
-          <mat-checkbox name="isOnSale" ngModel>On Sale</mat-checkbox>
+          <mat-checkbox
+            type="checkbox"
+            formControlName="isOnSale"
+            name="isOnSale"
+            >On Sale</mat-checkbox
+          >
         </div>
       </div>
       <div class="wrapper-button">
@@ -80,3 +100,4 @@
     </form>
   </div>
 </div>
+
