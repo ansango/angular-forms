@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
   ValidationErrors,
+  Validators
 } from '@angular/forms';
 import Wine from '../model/wine';
 
@@ -26,8 +25,20 @@ export class WineNewComponent implements OnInit {
 
   createForm() {
     this.wineForm = this.builder.group({
-      name: ['', [Validators.required, this.validateName]],
-      price: [0, [Validators.required, Validators.min(1)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          this.validateName([
+            'Laya',
+            'K-Naina',
+            'Verdejo',
+            'Monastrell',
+            'Anibal'
+          ]),
+        ]
+      ],
+      price: [0, [Validators.required, Validators.min(2)]],
       imageUrl: [
         '',
         [
@@ -49,11 +60,11 @@ export class WineNewComponent implements OnInit {
     }
   }
 
-  validateName(control: AbstractControl): ValidationErrors | null {
-    const name: string = control.value;
-    const validNames = ['Laya', 'K-Naina', 'Verdejo', 'Monastrel'];
-    const isValid = validNames.includes(name);
-
-    return isValid ? null : { name: validNames };
+  private validateName(validNames: string[]) {
+    return (control: AbstractControl) : ValidationErrors | null => {
+      const name: string = control.value;
+      const isValid = validNames.includes(name);
+      return isValid ? null : {name: validNames};
+    };
   }
 }

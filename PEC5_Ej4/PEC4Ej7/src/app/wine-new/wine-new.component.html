@@ -20,25 +20,21 @@
             />
             <mat-error
               *ngIf="
-                (wineForm.get('name')?.dirty ||
-                  wineForm.get('name')?.touched ||
-                  message) &&
-                wineForm.get('name')?.invalid
-              "
-              >
-              <div *ngIf="wineForm.get('name')?.errors?.required">
-                Wine name is required
-              </div>
-              <div *ngIf="wineForm.get('name')?.errors?.name">
-                Wine name not valid, valid names are:
-                <ul>
-                  <li >
-
-                  </li>
-                </ul>
-              </div>
-              </mat-error
-            >
+                (wineForm.get('name')!.dirty ||
+                  wineForm.get('name')!.touched ||
+                  message) ">
+                <div *ngIf="wineForm.get('name')?.errors?.required">
+                  Wine name is required
+                </div>
+                <div *ngIf="wineForm.get('name')?.errors?.name">
+                  Wine name is not valid. Valid names are:
+                  <ul>
+                    <li *ngFor="let name of wineForm.get('name')?.errors?.name">
+                      {{name}}
+                    </li>
+                  </ul>
+                </div>
+                </mat-error>
           </mat-form-field>
         </div>
         <div class="wine-price">
@@ -62,8 +58,8 @@
               <div *ngIf="wineForm.get('price')?.errors?.required">
                 Wine price is required
               </div>
-              <div *ngIf="wineForm.get('price')?.errors?.min">
-                Wine price must be at least 1
+              <div *ngIf="wineForm.get('price')!.errors!.min">
+                Wine price must be atleast {{wineForm.get('price')?.errors?.min?.min}}. Actual: {{wineForm.get('price')?.errors?.min?.actual}}
               </div>
             </mat-error>
           </mat-form-field>
