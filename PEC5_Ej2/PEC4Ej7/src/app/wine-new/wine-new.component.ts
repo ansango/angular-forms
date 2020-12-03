@@ -13,7 +13,7 @@ export class WineNewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  newWine(wineForm: { value: { wine: Wine }; invalid: any }) {
+  newWine(wineForm: { value: { wine: Wine }; invalid: boolean | null }) {
     //? invalid no deberia ser bool?
     if (wineForm.invalid) {
       this.message = 'CHECK FORM ERRORS';

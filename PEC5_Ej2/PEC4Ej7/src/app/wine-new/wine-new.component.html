@@ -59,10 +59,10 @@
                 wineImageUrl.invalid
               "
             >
-              <div *ngIf="wineImageUrl.errors!.required">
+              <div *ngIf="wineImageUrl.errors?.required">
                 Wine Image URL is required
               </div>
-              <div *ngIf="wineImageUrl.errors!.pattern">
+              <div *ngIf="wineImageUrl.errors?.pattern">
                 Wine Image URL does not seem to be a valid URL
               </div>
             </mat-error>

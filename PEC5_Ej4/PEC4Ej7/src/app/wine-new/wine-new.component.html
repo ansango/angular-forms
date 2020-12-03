@@ -20,12 +20,24 @@
             />
             <mat-error
               *ngIf="
-                (wineForm.get('name')!.dirty ||
-                  wineForm.get('name')!.touched ||
+                (wineForm.get('name')?.dirty ||
+                  wineForm.get('name')?.touched ||
                   message) &&
-                wineForm.get('name')!.invalid
+                wineForm.get('name')?.invalid
               "
-              >Wine Name is required</mat-error
+              >
+              <div *ngIf="wineForm.get('name')?.errors?.required">
+                Wine name is required
+              </div>
+              <div *ngIf="wineForm.get('name')?.errors?.name">
+                Wine name not valid, valid names are:
+                <ul>
+                  <li >
+
+                  </li>
+                </ul>
+              </div>
+              </mat-error
             >
           </mat-form-field>
         </div>
@@ -41,17 +53,17 @@
             />
             <mat-error
               *ngIf="
-                (wineForm.get('price')!.dirty ||
-                  wineForm.get('price')!.touched ||
+                (wineForm.get('price')?.dirty ||
+                  wineForm.get('price')?.touched ||
                   message) &&
-                wineForm.get('price')!.invalid
+                wineForm.get('price')?.invalid
               "
             >
-              <div *ngIf="wineForm.get('price')!.errors!.required">
+              <div *ngIf="wineForm.get('price')?.errors?.required">
                 Wine price is required
               </div>
-              <div *ngIf="wineForm.get('price')!.errors!.min">
-                Wine price must be atleast 1
+              <div *ngIf="wineForm.get('price')?.errors?.min">
+                Wine price must be at least 1
               </div>
             </mat-error>
           </mat-form-field>
@@ -68,16 +80,16 @@
             />
             <mat-error
               *ngIf="
-                (wineForm.get('imageUrl')!.dirty ||
-                  wineForm.get('imageUrl')!.touched ||
+                (wineForm.get('imageUrl')?.dirty ||
+                  wineForm.get('imageUrl')?.touched ||
                   message) &&
-                wineForm.get('imageUrl')!.invalid
+                wineForm.get('imageUrl')?.invalid
               "
             >
-              <div *ngIf="wineForm.get('imageUrl')!.errors!.required">
+              <div *ngIf="wineForm.get('imageUrl')?.errors?.required">
                 Wine Image URL is required
               </div>
-              <div *ngIf="wineForm.get('imageUrl')!.errors!.pattern">
+              <div *ngIf="wineForm.get('imageUrl')?.errors?.pattern">
                 Wine Image URL does not seem to be a valid URL
               </div>
             </mat-error>
@@ -100,4 +112,3 @@
     </form>
   </div>
 </div>
-
