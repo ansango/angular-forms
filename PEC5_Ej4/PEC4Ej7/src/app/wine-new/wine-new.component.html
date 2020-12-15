@@ -29,12 +29,13 @@
                 Wine name is required
               </div>
               <div *ngIf="wineForm.get('name')?.errors?.name">
-                Wine name is not valid. Valid names are:
-                <ul>
-                  <li *ngFor="let name of wineForm.get('name')?.errors?.name">
-                    {{ name }}
-                  </li>
-                </ul>
+                <div class="wines-error-container">
+                  Wine name is not valid.
+                  <!--Valid names are:
+                  <ul *ngFor="let name of wineForm.get('name')?.errors?.name">
+                    <li>{{ name }}</li>
+                  </ul>-->
+                </div>
               </div>
             </mat-error>
           </mat-form-field>
@@ -62,7 +63,7 @@
               </div>
               <div *ngIf="wineForm.get('price')!.errors!.min">
                 Wine price must be atleast
-                {{ wineForm.get("price")?.errors?.min?.min }}. Actual:
+                {{ wineForm.get("price")?.errors?.min?.min }}. Current:
                 {{ wineForm.get("price")?.errors?.min?.actual }}
               </div>
             </mat-error>

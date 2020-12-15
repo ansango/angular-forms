@@ -35,11 +35,10 @@ export class WineNewComponent implements OnInit {
             'K-Naina',
             'Verdejo',
             'Monastrell',
-            'Anibal'
           ]),
         ]
       ],
-      price: [0, [Validators.required, Validators.min(2)]],
+      price: [0, [Validators.required, Validators.min(1)]],
       imageUrl: [
         '',
         [
