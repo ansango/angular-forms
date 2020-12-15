@@ -6,6 +6,7 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
+import { $ } from 'protractor';
 import Wine from '../model/wine';
 
 @Component({
@@ -68,3 +69,6 @@ export class WineNewComponent implements OnInit {
     };
   }
 }
+
+
+
